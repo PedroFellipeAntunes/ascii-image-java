@@ -5,11 +5,11 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
 (Though my code does not include the part about edge detection)
 
 <p align="center">
-  <img src="baboon_ASCII%5B8%5D.png" width="350" alt="Example ASCII Art">
+  <img src="tests/baboon_ASCII%5B8%5D.png" width="350" alt="Example ASCII Art">
 </p>
 
 <p align="center">
-  <img src="tulips_ASCII%5B8%5D.png" width="350" alt="Example ASCII Art with color">
+  <img src="tests/tulips_ASCII%5B8%5D.png" width="350" alt="Example ASCII Art with color">
 </p>
 
 ## Features
