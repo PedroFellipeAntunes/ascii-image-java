@@ -1,0 +1,17 @@
+Windows/CharacterWindow.class
+Operation/Scaler.class
+Operation/AsciiImageGenerator.class
+FileManager/PngReader.class
+FileManager/Grayscale.class
+Util/Main.class
+Operation/Quantization.class
+ImageData/Pixel.class
+Operation/AsciiMapper.class
+Windows/DropDownWindow.class
+Operation/StringSortedAscii.class
+Windows/ImageViewer$ImagePanel.class
+Operation/Operations.class
+Windows/DropDownWindow$1.class
+Windows/ImageViewer.class
+FileManager/PngSaver.class
+FileManager/PngConverter.class
