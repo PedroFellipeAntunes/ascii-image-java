@@ -15,7 +15,7 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
 ## Features
 
 - **Image Selection**: Choose images in `.png`, `.jpg`, or `.jpeg` formats for conversion.
-- **Character Set Customization**: Use custom ASCII character sets to define the appearance of the ASCII art.
+- **Character Set Customization**: Use custom ASCII character sets to define the appearance of the ASCII art, which can be ordered automatically to create the gradient.
 - **Scaling**: Adjust the scaling factor to control the size of the output ASCII art.
 - **Color Option**: Choose to display the ASCII art in color based on the original image's colors or in monochrome.
 - **Preview & Save Option**: Preview the generated ASCII art and choose to save it after processing.
@@ -39,9 +39,9 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
 ## How to Use
 
 1. **Start the Application**: Run the Java application in NetBeans or execute the `.jar` file in the **target** folder.
-2. **Select Images**: Use the image selection dialog to load images (`.png`, `.jpg`, or `.jpeg`).
-3. **Adjust Parameters**:
+2. **Adjust Parameters**:
    - Set the scaling factor to control the size of the ASCII art.
    - Choose a custom ASCII character set to define the appearance of the art.
    - Toggle the color option to display the ASCII art in color or monochrome.
-4. **Preview & Save**: After processing the image, preview the generated ASCII art. You will be prompted to save the modified image as a PNG file with the new name.
+3. **Select Images**: Drop down the image files to load them (`.png`, `.jpg`, or `.jpeg`).
+5. **Preview & Save**: After processing the image, preview the generated ASCII art. You will be prompted to save the modified image as a PNG file with the new name.
