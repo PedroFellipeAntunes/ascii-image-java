@@ -1,6 +1,7 @@
 Windows/CharacterWindow.class
 Operation/Scaler.class
 Operation/AsciiImageGenerator.class
+Operation/SobelEdge.class
 FileManager/PngReader.class
 FileManager/Grayscale.class
 Util/Main.class

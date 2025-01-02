@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class AsciiImageGenerator {
-    public ArrayList<ArrayList<Pixel>> generateImage(ArrayList<ArrayList<Pixel>> image, char[][] asciiMatrix, int scale, String fontName, int style, boolean color) {
+    public ArrayList<ArrayList<Pixel>> generateImage(ArrayList<ArrayList<Pixel>> image, char[][] asciiMatrix, char[][] asciiEdges, int scale, String fontName, int style, boolean color) {
         int cellWidth = image.get(0).size() / asciiMatrix[0].length;
         int cellHeight = image.size() / asciiMatrix.length;
         
@@ -38,12 +38,15 @@ public class AsciiImageGenerator {
                 int charX = newX + offsetX;
                 int charY = newY + offsetY;
                 
+                //Check which char should use
+                char character = asciiEdges[y][x] == ' ' ? asciiMatrix[y][x] : asciiEdges[y][x];
+                
                 if (color) {
                     Pixel pixel = image.get(newY).get(newX);
                     g.setColor(new Color(pixel.getRed(), pixel.getGreen(), pixel.getBlue()).brighter());
                 }
                 
-                g.drawString(String.valueOf(asciiMatrix[y][x]), charX, charY);
+                g.drawString(String.valueOf(character), charX, charY);
             }
         }
         

@@ -37,10 +37,14 @@ public class Operations {
         AsciiMapper am = new AsciiMapper();
         char[][] asciiImage = am.map(image, ascii, scale);
         
-        if (asciiImage != null) {
+        //Find edges in image
+        SobelEdge se = new SobelEdge();
+        char[][] asciiEdges = se.generateEdges(image, scale, 75); //75%
+        
+        if (asciiImage != null && asciiEdges != null) {
             //Generate image based on ascii matrix
             AsciiImageGenerator aig = new AsciiImageGenerator();
-            image = aig.generateImage(originalImage, asciiImage, scale, font, style, color);
+            image = aig.generateImage(originalImage, asciiImage, asciiEdges, scale, font, style, color);
         }
         
         //Show image to user
