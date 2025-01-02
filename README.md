@@ -2,7 +2,7 @@
 
 This project is a **Java Maven** application built using **NetBeans** IDE and **Swing** that converts images into **ASCII art** representations. Users can select image files, adjust parameters like scaling, and choose various ASCII character sets for the conversion.
 This code is HEAVILY inspired by this video made by **Acerola:** https://www.youtube.com/watch?v=gg40RWiaHRY
-(Though my code does not include the part about edge detection)
+~~(Though my code does not include the part about edge detection)~~ (Uptaded to consider edges in image with Sobel)
 
 <p align="center">
   <img src="tests/baboon_ASCII%5B8%5D.png" width="350" alt="Example ASCII Art">
