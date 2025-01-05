@@ -5,11 +5,16 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
 ~~(Though my code does not include the part about edge detection)~~ (Uptaded to consider edges in image with Sobel)
 
 <p align="center">
-  <img src="tests/baboon_ASCII%5B8%5D.png" width="350" alt="Example ASCII Art">
+  <img src="tests/baboon_ASCII%5B8%5D.png" width="450" alt="Example ASCII Art">
 </p>
 
 <p align="center">
-  <img src="tests/tulips_ASCII%5B8%5D.png" width="350" alt="Example ASCII Art with color">
+  <img src="tests/tulips_ASCII%5B8%5D.png" width="550" alt="Example ASCII Art with color">
+</p>
+
+
+<p align="center">
+  <img src="tests/ff14_ASCII%5B8%5D.png" width="850" alt="Example ASCII Art inverted">
 </p>
 
 ## Features
@@ -18,6 +23,7 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
 - **Character Set Customization**: Use custom ASCII character sets to define the appearance of the ASCII art, which can be ordered automatically to create the gradient.
 - **Scaling**: Adjust the scaling factor to control the size of the output ASCII art.
 - **Color Option**: Choose to display the ASCII art in color based on the original image's colors or in monochrome.
+- **Invert**: Choose to the brightness of the image, useful for images with very high brightness.
 - **Preview & Save Option**: Preview the generated ASCII art and choose to save it after processing.
 
 ## Output Format & Naming
