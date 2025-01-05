@@ -20,6 +20,9 @@ public class DropDownWindow {
     private int scale = 8;
     private JButton colorButton;
     private JButton fontButton;
+    private JButton invertButton;
+    
+    private boolean invert = false;
     private boolean color = false;
     private boolean loading = false;
     private Font defaultFont = UIManager.getDefaults().getFont("Label.font");
@@ -69,6 +72,7 @@ public class DropDownWindow {
                     loading = true;
                     ableOrDisableButton(colorButton);
                     ableOrDisableButton(fontButton);
+                    ableOrDisableButton(invertButton);
                     
                     frame.repaint();
                     
@@ -76,7 +80,7 @@ public class DropDownWindow {
                         int filesProcessed = 1;
                         
                         for (File file : files) {
-                            Operations.processFile(file.getPath(), color, scale, ascii);
+                            Operations.processFile(file.getPath(), color, scale, ascii, invert);
                             
                             filesProcessed++;
                             
@@ -95,6 +99,7 @@ public class DropDownWindow {
                                 loading = false;
                                 ableOrDisableButton(colorButton);
                                 ableOrDisableButton(fontButton);
+                                ableOrDisableButton(invertButton);
                             });
                             
                             resetTimer.setRepeats(false);
@@ -193,6 +198,23 @@ public class DropDownWindow {
             }
         });
         
+        //Invert button
+        invertButton = new JButton("Invert");
+        setButtonsVisuals(invertButton);
+        
+        invertButton.addActionListener(e -> {
+            if (!loading) {
+                if (invert == true) {
+                    resetButton(invertButton);
+                    invert = false;
+                } else {
+                    invertButton.setBackground(Color.WHITE);
+                    invertButton.setForeground(Color.BLACK);
+                    invert = true;
+                }
+            }
+        });
+        
         //Bottom panel
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         controlPanel.setBackground(Color.BLACK);
@@ -201,6 +223,7 @@ public class DropDownWindow {
         controlPanel.add(sliderPanel);
         controlPanel.add(colorButton);
         controlPanel.add(fontButton);
+        controlPanel.add(invertButton);
         
         frame.add(controlPanel, BorderLayout.SOUTH);
         frame.add(dropLabel, BorderLayout.CENTER);

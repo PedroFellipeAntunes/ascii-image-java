@@ -17,7 +17,7 @@ public class Operations {
     static String font = Font.MONOSPACED;
     static int style = Font.PLAIN;
     
-    public static void processFile(String filePath, boolean color, int scale, char[] ascii) {
+    public static void processFile(String filePath, boolean color, int scale, char[] ascii, boolean invert) {
         Operations.scale = scale;
         
         PngReader imageToPixelList = new PngReader();
@@ -35,7 +35,7 @@ public class Operations {
         
         //Map luminance (brigthness) to ascii
         AsciiMapper am = new AsciiMapper();
-        char[][] asciiImage = am.map(image, ascii, scale);
+        char[][] asciiImage = am.map(image, ascii, scale, invert);
         
         //Find edges in image
         SobelEdge se = new SobelEdge();

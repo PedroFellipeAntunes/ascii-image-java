@@ -82,6 +82,7 @@ public class CharacterWindow extends JDialog {
         setLocationRelativeTo(owner);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setResizable(false);
+        setSize(new Dimension(200, 300));
         setVisible(true);
     }
     
