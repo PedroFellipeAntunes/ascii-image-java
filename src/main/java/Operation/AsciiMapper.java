@@ -20,11 +20,7 @@ public class AsciiMapper {
                 float[] hsb = Color.RGBtoHSB(pixel.getRed(), pixel.getGreen(), pixel.getBlue(), null);
                 
                 // Map to vector
-                int index = (int) (hsb[2] * ascii.length);
-                
-                if (index >= ascii.length) {
-                    index = ascii.length - 1;
-                }
+                int index = (int) (hsb[2] * (ascii.length - 1));
                 
                 if (invert) {
                     index = ascii.length - 1 - index;
