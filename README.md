@@ -14,7 +14,7 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
 
 
 <p align="center">
-  <img src="tests/ff14_ASCII%5B8%5D.png" width="850" alt="Example ASCII Art inverted">
+  <img src="tests/warframe_ASCII%5B8%5D.png" width="750" alt="Example ASCII Art inverted">
 </p>
 
 ## Features
