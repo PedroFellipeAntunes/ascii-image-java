@@ -2,7 +2,6 @@
 
 This project is a **Java Maven** application built using **NetBeans** IDE and **Swing** that converts images into **ASCII art** representations. Users can select image files, adjust parameters like scaling, and choose various ASCII character sets for the conversion.
 This code is HEAVILY inspired by this video made by **Acerola:** https://www.youtube.com/watch?v=gg40RWiaHRY
-~~(Though my code does not include the part about edge detection)~~ (Uptaded to consider edges in image with Sobel)
 
 <p align="center">
   <img src="tests/baboon_ASCII%5B8%5D.png" width="450" alt="Example ASCII Art">
@@ -11,7 +10,6 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
 <p align="center">
   <img src="tests/tulips_ASCII%5B8%5D.png" width="550" alt="Example ASCII Art with color">
 </p>
-
 
 <p align="center">
   <img src="tests/warframe_ASCII%5B8%5D.png" width="750" alt="Example ASCII Art inverted">
@@ -35,13 +33,6 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
   - `original_name` is the original image's filename.
   - `scale` is the size of the character in the scaled grid of the image.
 
-## Implementation Details
-
-- The core image processing is managed through a data structure of `ArrayList<ArrayList<Pixel>>` to represent and manipulate image pixel data.
-- `Pixel` is an object containing separate `int` values for **RGBA**.
-- Each image is processed based on user input and settings, and a preview is displayed after every operation.
-- The final window allows users to save the modified ASCII art image.
-
 ## How to Use
 
 1. **Start the Application**: Run the Java application in NetBeans or execute the `.jar` file in the **target** folder.
@@ -51,3 +42,6 @@ This code is HEAVILY inspired by this video made by **Acerola:** https://www.you
    - Toggle the color option to display the ASCII art in color or monochrome.
 3. **Select Images**: Drop down the image files to load them (`.png`, `.jpg`, or `.jpeg`).
 5. **Preview & Save**: After processing the image, preview the generated ASCII art. You will be prompted to save the modified image as a PNG file with the new name.
+
+## Extra
+- There is a separate file which contains code which should read any text file and generate a string of certain size, ordered by luminance of each character.
