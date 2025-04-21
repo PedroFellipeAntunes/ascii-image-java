@@ -1,6 +1,6 @@
 package Windows;
 
-import Operation.Operations;
+import ASCII.Operations;
 
 import javax.swing.*;
 import java.awt.*;

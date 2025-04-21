@@ -2,7 +2,7 @@
 
 package Windows;
 
-import Operation.StringSortedAscii;
+import ASCII.StringSortedAscii;
 import javax.swing.*;
 import java.awt.*;
 
@@ -65,6 +65,11 @@ public class CharacterWindow extends JDialog {
         });
         
         saveButton.addActionListener(e -> {
+            asciiNew = textField.getText().toCharArray();
+            textField.setText(String.valueOf(asciiNew));
+            characterCount = asciiNew.length;
+            charCountLabel.setText("" + characterCount);
+            
             saved = true;
             dispose();
         });

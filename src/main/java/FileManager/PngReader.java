@@ -1,16 +1,12 @@
 package FileManager;
 
-import ImageData.Pixel;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class PngReader {
-    private final ArrayList<ArrayList<Pixel>> pixelGrid = new ArrayList<>();
-    
-    public ArrayList<ArrayList<Pixel>> readPNG(String fileLocation, boolean gray) {
+    public BufferedImage readPNG(String fileLocation, boolean grayscale) {
         try {
             File file = new File(fileLocation);
             BufferedImage image = ImageIO.read(file);
@@ -23,34 +19,39 @@ public class PngReader {
                 image = converter.convertToPng(image);
             }
             
-            for (int y = 0; y < image.getHeight(); y++) {
-                for (int x = 0; x < image.getWidth(); x++) {
-                    int currentPixel = image.getRGB(x, y);
-                    int[] RGBA = new int[4];
-                    
-                    RGBA[0] = (currentPixel >> 24) & 0xff; //Alpha
-                    RGBA[1] = (currentPixel >> 16) & 0xff; //Red
-                    RGBA[2] = (currentPixel >> 8) & 0xff; //Green
-                    RGBA[3] = (currentPixel) & 0xff; //Blue
-                    
-                    if (x == 0) {
-                        pixelGrid.add(new ArrayList<>());
-                    }
-                    
-                    if (gray == true) {
-                        Grayscale gs = new Grayscale();
-                        RGBA = gs.bt709(RGBA);
-                    }
-                    
-                    pixelGrid.get(y).add(new Pixel(RGBA[1], RGBA[2], RGBA[3], RGBA[0]));
-                }
+            if (grayscale) {
+                image = convertToGrayscale(image);
             }
             
-            return pixelGrid;
+            return image;
         } catch (IOException e) {
             System.err.println("Error when reading image: " + fileLocation);
         }
         
         return null;
+    }
+    
+    private BufferedImage convertToGrayscale(BufferedImage image) {
+        Grayscale gs = new Grayscale();
+        
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                int currentPixel = image.getRGB(x, y);
+                
+                int[] rgba = new int[4];
+                rgba[0] = (currentPixel >> 24) & 0xff; // Alpha
+                rgba[1] = (currentPixel >> 16) & 0xff; // Red
+                rgba[2] = (currentPixel >> 8) & 0xff;  // Green
+                rgba[3] = currentPixel & 0xff;         // Blue
+                
+                int[] grayRGBA = gs.bt709(rgba);
+                
+                int newPixel = (grayRGBA[0] << 24) | (grayRGBA[1] << 16) | (grayRGBA[2] << 8) | grayRGBA[3];
+                
+                image.setRGB(x, y, newPixel);
+            }
+        }
+        
+        return image;
     }
 }

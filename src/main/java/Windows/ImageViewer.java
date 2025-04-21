@@ -1,11 +1,9 @@
 package Windows;
 
-import ImageData.Pixel;
-import Operation.Operations;
+import ASCII.Operations;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class ImageViewer extends JDialog {
     private ImagePanel panel;
@@ -15,14 +13,17 @@ public class ImageViewer extends JDialog {
     
     private boolean goBack = false;
     
+    private final int MIN_WIDTH = 500;
+    private final int MIN_HEIGHT = 500;
+    
     public boolean wentBack() {
         return goBack;
     }
     
-    public ImageViewer(ArrayList<ArrayList<Pixel>> bandedImage, String filePath) {
+    public ImageViewer(BufferedImage image, String filePath) {
         super((Frame) null, "Image Viewer", true);
         
-        panel = new ImagePanel(bandedImage);
+        panel = new ImagePanel(image);
         panel.setBackground(new Color(61, 56, 70));
         
         buttonPanel = new JPanel();
@@ -35,7 +36,7 @@ public class ImageViewer extends JDialog {
         setButtonsVisuals(goBackButton);
         
         saveButton.addActionListener(e -> {
-            Operations.saveImage(bandedImage, filePath);
+            Operations.saveImage(image, filePath);
             goBack = true;
             dispose();
         });
@@ -51,7 +52,8 @@ public class ImageViewer extends JDialog {
         add(buttonPanel, BorderLayout.SOUTH);
         add(panel, BorderLayout.CENTER);
         
-        pack();
+        adjustWindowSize(image);
+        
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -66,45 +68,34 @@ public class ImageViewer extends JDialog {
         button.setPreferredSize(new Dimension(100, 40));
     }
     
+    private void adjustWindowSize(BufferedImage image) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int maxWidth = (int) (screenSize.width * 0.85);
+        int maxHeight = (int) (screenSize.height * 0.85);
+        
+        double scaleX = (double) maxWidth / image.getWidth();
+        double scaleY = (double) maxHeight / image.getHeight();
+        
+        double scale = Math.min(scaleX, scaleY);
+        
+        int scaledWidth = (int) (image.getWidth() * scale);
+        int scaledHeight = (int) (image.getHeight() * scale);
+        
+        int finalWidth = Math.max(MIN_WIDTH, scaledWidth);
+        int finalHeight = Math.max(MIN_HEIGHT, scaledHeight);
+        
+        setSize(finalWidth, finalHeight);
+    }
+    
     class ImagePanel extends JPanel {
         private BufferedImage image;
         
-        public ImagePanel(ArrayList<ArrayList<Pixel>> bandedImage) {
-            int width = bandedImage.get(0).size();
-            int height = bandedImage.size();
-            image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-            
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    Pixel p = bandedImage.get(i).get(j);
-                    Color color = new Color(p.getRed(), p.getGreen(), p.getBlue(), p.getAlpha());
-                    image.setRGB(j, i, color.getRGB());
-                }
-            }
-            
-            if (width > height) {
-                setPreferredSize(new Dimension(700, 500));
-            } else if (width == height) {
-                setPreferredSize(new Dimension(500, 500));
-            } else {
-                setPreferredSize(new Dimension(500, 600));
-            }
+        public ImagePanel(BufferedImage image) {
+            this.image = image;
         }
         
-        public void updateImage(ArrayList<ArrayList<Pixel>> bandedImage) {
-            int width = bandedImage.get(0).size();
-            int height = bandedImage.size();
-            
-            image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-            
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    Pixel p = bandedImage.get(i).get(j);
-                    Color color = new Color(p.getRed(), p.getGreen(), p.getBlue(), p.getAlpha());
-                    image.setRGB(j, i, color.getRGB());
-                }
-            }
-            
+        public void updateImage(BufferedImage newImage) {
+            this.image = newImage;
             repaint();
         }
         
@@ -113,10 +104,12 @@ public class ImageViewer extends JDialog {
             super.paintComponent(g);
             double scaleX = (double) getWidth() / image.getWidth();
             double scaleY = (double) getHeight() / image.getHeight();
+            
             double scale = Math.min(scaleX, scaleY);
             
             int newWidth = (int) (image.getWidth() * scale);
             int newHeight = (int) (image.getHeight() * scale);
+            
             int x = (getWidth() - newWidth) / 2;
             int y = (getHeight() - newHeight) / 2;
             
